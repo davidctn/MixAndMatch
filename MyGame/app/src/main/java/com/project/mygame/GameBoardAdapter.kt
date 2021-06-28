@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.project.mygame.models.BoardSize
 import kotlin.math.min
 
-class GameBoardAdapter(private val context:Context, private val NumPieces : Int) : RecyclerView.Adapter<GameBoardAdapter.ViewHolder>() {
+class GameBoardAdapter(private val context:Context, private val boardSize: BoardSize) : RecyclerView.Adapter<GameBoardAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -33,8 +34,8 @@ class GameBoardAdapter(private val context:Context, private val NumPieces : Int)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //how to create one view in the rv
-        var cardWidth :Int =parent.width / 2 - (2* MARGIN_SIZE)
-        var cardHeight :Int =parent.height / 4 - (2* MARGIN_SIZE)
+        var cardWidth :Int =parent.width / boardSize.getWitdh() - (2* MARGIN_SIZE)
+        var cardHeight :Int =parent.height / boardSize.getHeight() - (2* MARGIN_SIZE)
         var cardSideLength :Int = min(cardWidth,cardHeight)
         val view = LayoutInflater.from(context).inflate(R.layout.memory_card,parent,false)
         val layoutParams : ViewGroup.MarginLayoutParams =view.findViewById<CardView>(R.id.cardView).layoutParams as ViewGroup.MarginLayoutParams
@@ -49,6 +50,6 @@ class GameBoardAdapter(private val context:Context, private val NumPieces : Int)
       holder.bind(position)
     }
 
-    override fun getItemCount() = NumPieces
+    override fun getItemCount() = boardSize.numberCards
 
 }
