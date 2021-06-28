@@ -6,6 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.mygame.models.BoardSize
+import com.project.mygame.models.Game
+import com.project.mygame.models.MemoryCard
+import com.project.mygame.utility.DEFAULT_ICONS
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +25,10 @@ class MainActivity : AppCompatActivity() {
         rvGameBoard = findViewById(R.id.rvGameBoard)
         tvNumberMoves = findViewById(R.id.tvNumberMoves)
         tvNumberPairs = findViewById(R.id.tvNumberPairs)
-        rvGameBoard.adapter = GameBoardAdapter(this,boardSize)
+
+        val memoryGame = Game(boardSize)
+
+        rvGameBoard.adapter = GameBoardAdapter(this,boardSize,memoryGame.cards)
         rvGameBoard.setHasFixedSize(true)
         rvGameBoard.layoutManager=GridLayoutManager(this,boardSize.getWitdh())
     }

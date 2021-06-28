@@ -9,16 +9,22 @@ import android.widget.ImageButton
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.mygame.models.BoardSize
+import com.project.mygame.models.MemoryCard
 import kotlin.math.min
 
-class GameBoardAdapter(private val context:Context, private val boardSize: BoardSize) : RecyclerView.Adapter<GameBoardAdapter.ViewHolder>() {
+class GameBoardAdapter(
+    private val context: Context,
+    private val boardSize: BoardSize,
+    private val cards: List<MemoryCard>
+) : RecyclerView.Adapter<GameBoardAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val imageButton = itemView.findViewById<ImageButton>(R.id.imageButton)
 
         fun bind(position: Int) {
-
+            val memoryCard=cards[position]
+            imageButton.setImageResource(if(memoryCard.isFaceUp) memoryCard.identifier else R.drawable.ic_launcher_background)
             imageButton.setOnClickListener {
                 Log.i(TAG,"Clicked on position $position")
             }
