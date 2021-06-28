@@ -3,6 +3,7 @@ package com.project.mygame
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -18,5 +19,8 @@ class MainActivity : AppCompatActivity() {
         rvGameBoard = findViewById(R.id.rvGameBoard)
         tvNumberMoves = findViewById(R.id.tvNumberMoves)
         tvNumberPairs = findViewById(R.id.tvNumberPairs)
+        rvGameBoard.adapter = GameBoardAdapter(this,8)
+        rvGameBoard.setHasFixedSize(true)
+        rvGameBoard.layoutManager=GridLayoutManager(this,2)
     }
 }
