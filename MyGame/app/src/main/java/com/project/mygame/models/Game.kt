@@ -7,6 +7,7 @@ class Game(private val boardSize: BoardSize) {
     val cards: List<MemoryCard>
     var numberPairs = 0
     private var firstCardIndex: Int? = null
+    private var flippedCards = 0
 
     init {
         val chosenImages: List<Int> = DEFAULT_ICONS.shuffled().take(boardSize.getNumberPairs())
@@ -16,7 +17,7 @@ class Game(private val boardSize: BoardSize) {
     }
 
     fun flipCard(position: Int) : Boolean {
-
+        flippedCards++
         var foundMatch = false
         val card: MemoryCard = cards[position]
         if (firstCardIndex == null) {
@@ -62,5 +63,9 @@ class Game(private val boardSize: BoardSize) {
     fun isFaceUp(position : Int): Boolean {
 
         return cards[position].isFaceUp
+    }
+
+    fun getNumberMoves(): Int {
+return flippedCards/2
     }
 }
