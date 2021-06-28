@@ -4,9 +4,11 @@ import android.animation.ArgbEvaluator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +46,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBoard() {
 
-        
+        when(boardSize){
+            BoardSize.EASY -> {
+                tvNumberMoves.text="Easy : 4 x 2"
+                tvNumberPairs.text="Pairs : 0 / 4"
+            }
+            BoardSize.MEDIUM -> {
+                tvNumberMoves.text="Medium : 6 x 3"
+                tvNumberPairs.text="Pairs : 0 / 9"
+            }
+            BoardSize.HARD -> {
+                tvNumberMoves.text="Hard : 6 x 4"
+                tvNumberPairs.text="Pairs : 0 / 12"
+            }
+        }
         tvNumberPairs.setTextColor(ContextCompat.getColor(this,R.color.color_progress_0))
         memoryGame = Game(boardSize)
         adapter = GameBoardAdapter(this,boardSize,memoryGame.cards, object : GameBoardAdapter.CardClickListener{
@@ -70,14 +85,39 @@ class MainActivity : AppCompatActivity() {
                 if(!memoryGame.winGame() && memoryGame.getNumberMoves()>0){
                     displayAlertDialog("Are you sure you want to quit the current game ?",null,View.OnClickListener {
                         setupBoard()
+
                     })
+                    return true
                 }
                 else{
                     setupBoard()
                 }
             }
+
+            R.id.menuitem_chooseSize ->{
+                displayNewSizeDialog()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun displayNewSizeDialog() {
+      var boardSizeView =  LayoutInflater.from(this).inflate(R.layout.dialog_board_size,null)
+        var radioGroup=boardSizeView.findViewById<RadioGroup>(R.id.radioGroup)
+        when(boardSize){
+            BoardSize.EASY -> radioGroup.check(R.id.gamemodeEasy)
+            BoardSize.MEDIUM -> radioGroup.check(R.id.gamemodeMedium)
+            BoardSize.HARD -> radioGroup.check(R.id.gamemodeHard)
+        }
+            displayAlertDialog("Choose new size",boardSizeView,View.OnClickListener {
+                    boardSize=when(radioGroup.checkedRadioButtonId){
+                        R.id.gamemodeEasy->BoardSize.EASY
+                        R.id.gamemodeMedium->BoardSize.MEDIUM
+                        else->BoardSize.HARD
+                    }
+                setupBoard()
+            })
     }
 
     private fun displayAlertDialog(title : String, view : View?, positiveClickListenener : View.OnClickListener) {
