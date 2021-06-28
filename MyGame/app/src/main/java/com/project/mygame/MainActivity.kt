@@ -1,6 +1,7 @@
 package com.project.mygame
 
 import android.animation.ArgbEvaluator
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.jinatonic.confetti.CommonConfetti
 import com.google.android.material.snackbar.Snackbar
 import com.project.mygame.models.BoardSize
 import com.project.mygame.models.Game
@@ -152,6 +154,7 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG,"Match found ! Number of matches founded ${memoryGame.numberPairs}")
             if(memoryGame.winGame()){
                 Snackbar.make(clRoot,"You won!",Snackbar.LENGTH_LONG).show()
+                CommonConfetti.rainingConfetti(clRoot, intArrayOf(Color.CYAN,Color.GREEN,Color.MAGENTA,Color.YELLOW,Color.RED)).oneShot()
             }
         }
         tvNumberMoves.text="Moves : ${memoryGame.getNumberMoves()}"

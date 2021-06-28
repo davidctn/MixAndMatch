@@ -56,7 +56,7 @@ class GameBoardAdapter(
 
         fun bind(position: Int) {
             val memoryCard=cards[position]
-            imageButton.setImageResource(if(memoryCard.isFaceUp) memoryCard.identifier else R.drawable.ic_launcher_background)
+            imageButton.setImageResource(if(memoryCard.isFaceUp) memoryCard.identifier else R.drawable.question)
             imageButton.alpha = if(memoryCard.isMatched) .5f else 1.0f
             val colorStateList =  if(memoryCard.isMatched) ContextCompat.getColorStateList(context,R.color.color_gray) else null
             ViewCompat.setBackgroundTintList(imageButton,colorStateList)//shade
