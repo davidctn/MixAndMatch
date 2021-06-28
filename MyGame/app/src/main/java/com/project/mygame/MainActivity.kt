@@ -1,6 +1,7 @@
 package com.project.mygame
 
 import android.animation.ArgbEvaluator
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,11 +21,14 @@ import com.github.jinatonic.confetti.CommonConfetti
 import com.google.android.material.snackbar.Snackbar
 import com.project.mygame.models.BoardSize
 import com.project.mygame.models.Game
+import com.project.mygame.utility.CreateActivity
+import com.project.mygame.utility.EXTRA_BOARD_SIZE
 
 class MainActivity : AppCompatActivity() {
 
     companion object{
         private const val TAG="MainActivity"
+        private const val CREATE_REQUEST_CODE = 888
     }
 
 
@@ -100,8 +104,28 @@ class MainActivity : AppCompatActivity() {
                 displayNewSizeDialog()
                 return true
             }
+            R.id.mi_custom -> {
+                showCreationDialog()
+            return true;
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showCreationDialog() {
+        var boardSizeView =  LayoutInflater.from(this).inflate(R.layout.dialog_board_size,null)
+        var radioGroup=boardSizeView.findViewById<RadioGroup>(R.id.radioGroup)
+        displayAlertDialog("Create new memory board",boardSizeView,View.OnClickListener {
+            val desiredBoardSize = when (radioGroup.checkedRadioButtonId) {
+                R.id.gamemodeEasy -> BoardSize.EASY
+                R.id.gamemodeMedium -> BoardSize.MEDIUM
+                else -> BoardSize.HARD
+            }
+            //trimite la activitate noua
+            val intent = Intent(this, CreateActivity::class.java)
+            intent.putExtra(EXTRA_BOARD_SIZE, desiredBoardSize)
+            startActivityForResult(intent, CREATE_REQUEST_CODE)
+        })
     }
 
     private fun displayNewSizeDialog() {

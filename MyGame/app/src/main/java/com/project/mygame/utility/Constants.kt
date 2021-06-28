@@ -2,6 +2,7 @@ package com.project.mygame.utility
 
 import com.project.mygame.R
 
+const val EXTRA_BOARD_SIZE = "EXTRA_BOARD_SIZE"
 val DEFAULT_ICONS = listOf(
     R.drawable.ic_5g,
     R.drawable.ic_android,

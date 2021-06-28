@@ -1,11 +1,12 @@
-package com.project.mygame
+package com.project.mygame.utility
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.project.mygame.R
 
-class ToDelete : AppCompatActivity() {
+class CreateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_to_delete)
+        setContentView(R.layout.activity_create)
     }
 }
