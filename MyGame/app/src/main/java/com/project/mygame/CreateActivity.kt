@@ -1,10 +1,10 @@
-package com.project.mygame.utility
+package com.project.mygame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import com.project.mygame.R
 import com.project.mygame.models.BoardSize
+import com.project.mygame.utility.EXTRA_BOARD_SIZE
 
 class CreateActivity : AppCompatActivity() {
     private lateinit var boardSize: BoardSize

@@ -21,7 +21,6 @@ import com.github.jinatonic.confetti.CommonConfetti
 import com.google.android.material.snackbar.Snackbar
 import com.project.mygame.models.BoardSize
 import com.project.mygame.models.Game
-import com.project.mygame.utility.CreateActivity
 import com.project.mygame.utility.EXTRA_BOARD_SIZE
 
 class MainActivity : AppCompatActivity() {
