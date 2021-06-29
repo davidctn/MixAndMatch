@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MyGame</string>
+    <string name="app_name">Mix and Match</string>
+    <string name="notification_channel_description">1</string>
 </resources>

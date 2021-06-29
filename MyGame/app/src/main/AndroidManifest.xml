@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.mygame">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGame">
-        <activity android:name=".MainActivity"></activity>
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            ></receiver>
+
+        <activity android:name=".MainActivity" />
         <activity android:name=".CreateActivity" />
         <activity
             android:name=".MenuActivity"
@@ -20,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".NotificationService"
+            android:enabled="true" />
     </application>
 
 </manifest>
